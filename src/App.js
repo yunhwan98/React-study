@@ -1,46 +1,8 @@
 import React, { Component } from 'react';
+import TOC from "./components/TOC";
+import Content from "./components/Content";
+import Subject from "./components/Subject";
 import './App.css';
-
-class Subject extends Component{
-  render(){
-    return(
-    //props 적용(리팩토링)
-    <header>
-      <h1>{this.props.title}</h1>
-      {this.props.sub}
-    </header>
-    );
-
-  }
-}
-
-class TOC extends Component{
-  render(){
-    return(
-      <nav>
-        <ul>
-          <li><a href="1.html">HTML</a></li>
-          <li><a href="2.html">CSS</a></li>
-          <li><a href="3.html">JavaScript</a></li>
-
-        </ul>
-      </nav>
-    );
-
-  }
-}
-
-class Content extends Component{
-  render(){
-    return(
-      <article>
-        <h2>{this.props.title}</h2>
-        {this.props.desc}
-      </article>
-    );
-
-  }
-}
 
 //컴포넌트 사용
 class App extends Component{
