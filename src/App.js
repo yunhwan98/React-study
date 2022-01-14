@@ -41,6 +41,7 @@ class Content extends Component{
   }
 }
 
+//컴포넌트 사용
 class App extends Component{
   render(){
   return (
