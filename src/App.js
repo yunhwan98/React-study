@@ -9,7 +9,9 @@ class App extends Component{
   constructor(props){
     super(props);
     this.state = {//state 사용
+      mode:'read',
       subject:{title:'WEB', sub:'World Wide Web!'},
+      welcome:{title:'Welcome', desc:'Hello, React!!'},
       contents:[
           {id:1, title:'HTML', desc:'HTML is HyperText...'},
           {id:2, title:'CSS', desc:'CSS is for design'},
@@ -18,16 +20,25 @@ class App extends Component{
     }
 
   }
-  render(){
+  render(){//props나 state변경시 화면이 바뀜
+    console.log('App render');
+    var _title, _desc = null;
+    if(this.state.mode === 'welcome'){
+      _title =  this.state.welcome.title;
+      _desc =  this.state.welcome.desc;
+    }else if(this.state.mode === 'read'){
+
+      _title =  this.state.contents[0].title;
+      _desc =  this.state.contents[0].desc;
+    }
   return (
     <div className="App">
       <Subject 
         title={this.state.subject.title} 
         sub={this.state.subject.sub}>
       </Subject>
-      <Subject title="React" sub="For UI"></Subject>
       <TOC data={this.state.contents}></TOC>
-      <Content title="HTML" desc="HTML is HyperText Markup Language."></Content>
+      <Content title={_title} desc={_desc}></Content>
     </div>
   );
   }

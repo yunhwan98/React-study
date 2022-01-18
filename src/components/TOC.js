@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 //component를 파일단위로 분리
 class TOC extends Component{
   render(){
+    console.log('TOC render');
     var lists = [];
     var data =this.props.data;
     var i=0;
