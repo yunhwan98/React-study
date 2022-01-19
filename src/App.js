@@ -20,7 +20,7 @@ class App extends Component{
     }
 
   }
-  render(){//props나 state변경시 화면이 바뀜
+  render() {//props나 state변경시 화면이 바뀜
     console.log('App render');
     var _title, _desc = null;
     if(this.state.mode === 'welcome'){
@@ -31,20 +31,28 @@ class App extends Component{
       _title =  this.state.contents[0].title;
       _desc =  this.state.contents[0].desc;
     }
+  console.log('render',this);
   return (
     <div className="App">
-      {/* <Subject 
+      <Subject 
         title={this.state.subject.title} 
-        sub={this.state.subject.sub}>
-      </Subject> */}
-      <header>
+        sub={this.state.subject.sub}
+        onChangePage={function(){//이벤트에 함수설치
+          this.setState({mode:'welcome'});
+        }.bind(this)}
+      >
+      </Subject>
+      {/* <header>
         <h1><a href="/" onClick={function(e){
           console.log(e);
           e.preventDefault();//기본적인 동작 금지(페이지 전환 방지)
-          
-        }}>{this.state.subject.title}</a></h1>
+          //this.state.mode = 'welcome';
+          this.setState({ //bind(bind는 this 사용가능하게 해줌)와 setState사용(함수형태로 변경) 
+            mode:'welcome'
+          });
+        }.bind(this)}>{this.state.subject.title}</a></h1>
         {this.state.subject.sub}
-      </header>
+      </header> */}
       <TOC data={this.state.contents}></TOC>
       <Content title={_title} desc={_desc}></Content>
     </div>

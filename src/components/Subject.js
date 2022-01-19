@@ -6,7 +6,10 @@ class Subject extends Component{
     return(
     //props 적용(리팩토링)
     <header>
-      <h1><a href="/">{this.props.title}</a></h1>
+      <h1><a href="/" onClick={function(e){
+        e.preventDefault();//페이지 리로드 방지
+        this.props.onChangePage();
+      }.bind(this)}>{this.props.title}</a></h1>
       {this.props.sub}
     </header>
     );
