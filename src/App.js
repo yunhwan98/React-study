@@ -11,7 +11,7 @@ class App extends Component{
   constructor(props){
     super(props);
     this.state = {//state 사용
-      mode:'read',
+      mode:'create',
       selected_content_id:2,
       subject:{title:'WEB', sub:'World Wide Web!'},
       welcome:{title:'Welcome', desc:'Hello, React!!'},
@@ -26,7 +26,7 @@ class App extends Component{
   render() {//props나 state변경시 화면이 바뀜
     console.log('App render');
     var _title, _desc, _article = null;
-    if(this.state.mode === 'welcome'){
+    if(this.state.mode === 'welcome'){//mode에 따라 내용이 달라짐
       _title =  this.state.welcome.title;
       _desc =  this.state.welcome.desc;
       _article = <ReadContent title={_title} desc={_desc}></ReadContent>
