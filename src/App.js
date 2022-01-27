@@ -48,26 +48,34 @@ class App extends Component{
     } else if(this.state.mode === 'create'){
       _article = <CreateContent onSubmit={function(_title,_desc){
         this.max_content_id = this.max_content_id+1;
-        var _contents = this.state.contents.concat( //퍼포먼스 고려하여 변경시 push보다 concat이 유리
-          {id:this.max_content_id, title: _title, desc:_desc}
-        )
+        var _contents = Array.from(this.state.contents);
+        _contents.push( {id:this.max_content_id, title: _title, desc:_desc});
         this.setState({
-          contents: _contents
+          contents: _contents,
+          mode: 'read',
+          selected_content_id: this.max_content_id
         });
           console.log(_title,_desc);
       }.bind(this)}></CreateContent>
     } else if(this.state.mode === 'update'){
       _content=this.getReadContent();
-      _article = <UpdateContent data={_content} onSubmit={function(_title,_desc){
-        this.max_content_id = this.max_content_id+1;
-        var _contents = this.state.contents.concat( //퍼포먼스 고려하여 변경시 push보다 concat이 유리
-          {id:this.max_content_id, title: _title, desc:_desc}
-        )
-        this.setState({
-          contents: _contents
-        });
-          console.log(_title,_desc);
-      }.bind(this)}></UpdateContent>
+      _article = <UpdateContent data={_content} onSubmit={
+        function(_id, _title, _desc){
+          var _contents = Array.from(this.state.contents);  //새로운 배열생성(원본 복제)
+          var i = 0;
+          while(i<_contents.length){
+            if(_contents[i].id === _id){
+              _contents[i] = {id:_id, title:_title, desc:_desc};
+              break;
+            }
+            i = i+1;
+          }
+          this.setState({
+            contents: _contents,
+            mode: 'read'
+          });
+            console.log(_title,_desc);
+        }.bind(this)}></UpdateContent>
     }
     return _article;
   }
